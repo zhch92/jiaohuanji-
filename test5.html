@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title>360</title>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <!--<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>-->
+    <style type="text/css">
+        html,body{width: 100%;height: 100%;margin: 0;padding: 0;font-family: "microsoft yahei"}
+        ul{margin: 0;padding: 0;list-style: none}
+        .p_box{width: 100%;height: 100%;position: relative}
+        .box1,.box2,.box3,.box4{height: 100%;width: 100%;background-attachment: fixed;background-position: center}
+        .box1{background-image: url("img/1.jpg")}
+        .box2{background-image: url("img/2.jpg")}
+        .box3{background-image: url("img/3.jpg")}
+        .box4{background-image: url("img/4.jpg")}
+        .top{position: fixed;top: 26px;width: 100%;z-index: 9;}
+        .nav{width: 1020px;margin: 0 auto}
+        .nav .logo {
+            background:url("img/logo.png") no-repeat;
+            float: left;
+            width: 226px;
+            height: 47px;
+
+        }
+        .nav ul {
+            float: right;
+            position: relative;
+        }
+        .nav li.cur {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            margin-left: 52px;
+            display: inline;
+            cursor: pointer;
+        }
+        .nav .focus {
+            position: absolute;
+            left: 34px;
+            top: 0;
+            width: 60px;
+            height: 30px;
+            border: 1px solid #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-left: 0;
+            z-index: -1;
+        }
+
+        .nav li a{color: #f4f4f4}
+        .nav .cur a {
+            color: #fff;
+        }
+        .swi_nav
+        {
+            position: fixed;
+            left: 60px;
+            top: 50%;
+            margin-top: -162px;
+            z-index: 9;
+        }
+        .swi_nav ul {
+            background: url(img/nav.png) 0 0 no-repeat;
+
+            height: 264px;
+            overflow: hidden;
+            padding: 6px 0 0;
+        }
+        .swi_nav li {
+            color: #dcecff;
+            height: 21px;
+            line-height: 21px;
+            padding-left: 44px;
+            margin-bottom: 56px;
+        }
+        .swi_nav .cur {
+            background: url(img/nav_cho.png) 0 50% no-repeat;
+        }
+        .swi_nav .cur {
+            color: #23dd91;
+        }
+    </style>
+    <script type="text/javascript">
+         $(function(){
+//             头部导航鼠标经过 border跟着滑动
+             $(".nav ul li.cur").hover(function(){
+                 var pos = $(this).position().left;
+                 var w = $(this).width();
+                 $(".nav ul li.focus").stop(true).animate({
+                     left:pos+35+'px',
+                     width:w+32+'px'
+                 },500);
+             },function(){});
+
+             $(".nav ul").mouseleave(function(){
+                 $(".nav ul li.focus").stop(true).animate({
+                     left:'34px',
+                     width:'60px'
+                 },500)
+             })
+
+//             左侧导航js
+
+
+                 $(window).scroll(function(){
+                     var dH = $(document).scrollTop();
+                     var wH = $(window).height();
+                     var x = Math.round(dH/wH);
+                     $(".swi_nav li").eq(x).addClass("cur").siblings().removeClass("cur");
+                 })
+
+
+             $(".swi_nav li").on("click",function(){
+
+                var temp = $(this).index();
+                 var wH = $(window).height();
+                 $(document.body).stop(true).animate({
+                     scrollTop:temp*wH + 'px'
+                 },1000);
+             })
+         })
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="nav">
+            <div class="logo"></div>
+            <ul>
+                <li class="cur"><a>首页</a></li>
+                <li class="cur"><a >常见问题</a></li>
+                <li class="cur"><a >论坛</a></li>
+                <li class="cur"><a >360首页&gt;&gt;</a></li>
+                <li class="focus"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="p_box">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+    </div>
+    <div class="swi_nav">
+        <ul>
+            <li class="cur">安全换机</li>
+            <li>无网对传</li>
+            <li>隐私粉碎</li>
+            <li>一键转移</li>
+        </ul>
+    </div>
+</body>
+</html>
